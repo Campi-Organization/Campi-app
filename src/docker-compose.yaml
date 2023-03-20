@@ -4,25 +4,23 @@ services:
     image: mysql:8
     restart: always
     environment:
-      MYSQL_DATABASE: "dobot"
+      MYSQL_DATABASE: "CAMPI"
       MYSQL_USER: "user"
       MYSQL_PASSWORD: "password"
       MYSQL_ROOT_PASSWORD: "password"
     ports:
       - "3002:3306"
-    expose:
-      - "3306"
     volumes:
       - campi-db:/var/lib/mysql
-  api:
-    build: ./api
+  api-campi:
+    build: $PWD/api
     ports:
       - "3000:3000"
     restart: always
     depends_on:
       - db
     volumes:
-      - ./api:/api
+      - $PWD/api:/api
 
 volumes:
   campi-db:
