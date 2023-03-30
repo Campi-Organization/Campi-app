@@ -12,6 +12,7 @@ services:
       - "3003:3306"
     volumes:
       - campi-db:/var/lib/mysql
+      - ./mysql-dump:/docker-entrypoint-initdb.d
 
 volumes:
   campi-db:
