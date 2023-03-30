@@ -1,3 +1,7 @@
+#[macro_use]
+extern crate diesel;
+
+mod schema;
 mod db;
 
 use actix_web::{middleware::Logger, web::Data, App, HttpServer};
@@ -8,17 +12,14 @@ async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_BACKTRACE", "1");
     env_logger::init();
 
-    // Creating tables and syncing db
-    let client = Data::new(db::new_client().await.unwrap());
-    #[cfg(debug_assertions)]
-    client._db_push().await.unwrap();
+    // Connecting to db
 
     // Hosting server
     HttpServer::new(move || {
         let logger = Logger::default();
         App::new()
             .wrap(logger)
-            .app_data(client.clone())
+            // .app_data()
     })
     .bind(("0.0.0.0", 3000))?
     .run()

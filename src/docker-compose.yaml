@@ -9,18 +9,9 @@ services:
       MYSQL_PASSWORD: "password"
       MYSQL_ROOT_PASSWORD: "password"
     ports:
-      - "3002:3306"
+      - "3003:3306"
     volumes:
       - campi-db:/var/lib/mysql
-  api-campi:
-    build: $PWD/api
-    ports:
-      - "3000:3000"
-    restart: always
-    depends_on:
-      - db
-    volumes:
-      - $PWD/api:/api
 
 volumes:
   campi-db:

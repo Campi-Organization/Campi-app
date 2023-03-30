@@ -1,3 +1,2 @@
 [alias]
-prisma = "run --bin prisma --"
 dev = "run --bin campi-api"
